@@ -33,7 +33,7 @@ module Services
     end
 
     def weather weather_info
-      data = JSON.parse(weather_info.body)
+      JSON.parse weather_info.body
     end
   end
 end
