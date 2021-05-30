@@ -13,14 +13,14 @@ module Services
     end
 
     def get_ip_coordinates
-      response = RestClient.get "#{BASE_URL}/#{ACCESS_KEY}/#{ip}", get_ip_params
+      response = RestClient.get "#{BASE_URL}/#{ACCESS_KEY}/#{ip}", get_ip_coordinates_params
       return {} unless response.code == 200
       coordinates response
     end
 
     private
 
-    def get_ip_params
+    def get_ip_coordinates_params
       {
         params: { 
           include: PARAMS_TO_INCLUDE 
