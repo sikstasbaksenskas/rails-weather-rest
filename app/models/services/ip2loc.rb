@@ -13,16 +13,20 @@ module Services
     end
 
     def get_ip_coordinates
-      response = RestClient.get "#{BASE_URL}/#{ACCESS_KEY}/#{ip}", {
-        params: { 
-          include: PARAMS_TO_INCLUDE 
-        }
-      }
+      response = RestClient.get "#{BASE_URL}/#{ACCESS_KEY}/#{ip}", get_ip_params
       return {} unless response.code == 200
       coordinates response
     end
 
     private
+
+    def get_ip_params
+      {
+        params: { 
+          include: PARAMS_TO_INCLUDE 
+        }
+      }
+    end
 
     def coordinates ip_info
       data = JSON.parse(ip_info.body)

@@ -14,7 +14,6 @@ class Api::V1::WeatherController < ApplicationController
     weather = Services::OpenWeatherMap.new(coordinates).get_weather
     render json: { error: "weather not found" } and return if weather.empty?
 
-    # return coordinates or weather
     render json: weather
   end
 

@@ -14,7 +14,15 @@ module Services
     end
 
     def get_weather
-      response = RestClient.get "#{BASE_URL}", {
+      response = RestClient.get "#{BASE_URL}", get_weather_params
+      return {} unless response.code == 200
+      weather response
+    end
+
+    private
+
+    def get_weather_params
+      {
         params: { 
           lat: latitude,
           lon: longitude,
@@ -22,11 +30,7 @@ module Services
           appid: ACCESS_KEY
         }
       }
-      return {} unless response.code == 200
-      weather response
     end
-
-    private
 
     def weather weather_info
       data = JSON.parse(weather_info.body)
